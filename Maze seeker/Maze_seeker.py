@@ -26,7 +26,9 @@ maze_map = []
 maze_map = m
 treasuremap = []
 routemap = []
-start = 1,1 #to be changed
+startx = int(input('please insert the x value of the starting point'))
+starty = int(input('please insert the y value of the starting point'))
+start = startx , starty #to be changed
 end = 1,47  #to be changed 
 
 def step_seeker(step): #To plot the step number in the corresponding location on treasure map (ex 2 after 1)
