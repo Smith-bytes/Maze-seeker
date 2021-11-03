@@ -54,7 +54,7 @@ def dir_path(step): #transfer treasure map to route map
     global routemap
     global t
     global a
-    routemap[t][a]= 1
+    routemap[t][a]= 2
     while step > 1:
        
         if t > 0 and treasuremap[t-1][a] == step -1: #to find a step which is -1 smaller than the current step at surrounding, until we reach starting point
