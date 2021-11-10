@@ -47,6 +47,9 @@ def step_seeker(step): #To plot the step number in the corresponding location on
 
                 if y < len(treasuremap[x])-1 and treasuremap[x][y+1] == 0 and maze_map[x, y+1] == 0:
                     treasuremap[x][y+1] = step+1
+                else:
+                    print("no solution")
+                    exit(0)
 
 def print_map(map):
     for c in map:
