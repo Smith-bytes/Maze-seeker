@@ -21,35 +21,41 @@ f.close() # close file
  
 arr = numpy.array(linesres) # converts the boolean list into a array 
 m = arr.reshape((sqrootc,sqrootc)) # give array 51Row by 51Column  
-
+checkinglocus = 0
 maze_map = []
 maze_map = m
 treasuremap = []
 routemap = []
 startx = int(input('please insert the x value of the starting point'))
 starty = int(input('please insert the y value of the starting point'))
+if maze_map[startx][starty] == 1:
+    print("invalid input")
+    exit(0)
 start = startx , starty #to be changed
 end = 1,47  #to be changed 
 
 def step_seeker(step): #To plot the step number in the corresponding location on treasure map (ex 2 after 1)
     global treasuremap
+    global checkinglocus
     for x in range(len(treasuremap)):
         for y in range(len(treasuremap[x])):
             if treasuremap[x][y] == step:
                 if x > 0 and treasuremap[x-1][y] == 0 and maze_map[x-1, y] == 0 : #To check whether the location is empty, without any wall or previous walkthrough
                     treasuremap[x-1][y] = step+1
+                    checkinglocus+=1
 
                 if y > 0 and treasuremap[x][y-1] == 0 and maze_map[x, y-1] == 0 :
                     treasuremap[x][y-1] = step+1
+                    checkinglocus+=1
 
                 if x < len(treasuremap) -1 and treasuremap[x+1][y] == 0 and maze_map[x+1, y] == 0:
                     treasuremap[x+1][y] = step+1
+                    checkinglocus+=1
 
                 if y < len(treasuremap[x])-1 and treasuremap[x][y+1] == 0 and maze_map[x, y+1] == 0:
                     treasuremap[x][y+1] = step+1
-                else:
-                    print("no solution")
-                    exit(0)
+                    checkinglocus+=1
+                
 
 def print_map(map):
     for c in map:
@@ -93,7 +99,11 @@ step = 0
 print ("treasuremap dimention complete")
 while treasuremap[end[0]][end[1]] == 0: #loop wont stop until the end point is reached, each loop step +1 
     step += 1
+    checkinglocus = 0
     step_seeker(step)
+    if checkinglocus == 0:
+        print("error")
+        exit(0)
 
 print("pathing completed")
 print("total number of step:", step+1)
